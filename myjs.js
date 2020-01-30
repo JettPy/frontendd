@@ -35,6 +35,7 @@ var yPos = 150;
 var grav = 1;
 
 document.addEventListener("keydown", moveUp);
+document.addEventListener("click", moveUp);
 
 function moveUp() {
     yPos -= 20;

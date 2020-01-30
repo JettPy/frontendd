@@ -4,34 +4,35 @@ const http = require('http');
 const fs = require('fs');
 
 const server = http.createServer(function (request, response) {
-    console.log(request.method, request.url, request.status);
-    if (request.url == '/myjs.js'){
-        const myscript = fs.readFileSync('myjs.js','utf8');
-        response.end(myscript);
-    } else if (request.url == '/img/bird.png') {
-        const media = fs.readFileSync('img/bird.png', 'utf8');
-        response.end(media);
-    } else if (request.url == '/img/bg.png') {
-        const media = fs.readFileSync('img/bg.png', 'utf8');
-        response.end(media);
-    } else if (request.url == '/img/fg.png') {
-        const media = fs.readFileSync('img/fg.png', 'utf8');
-        response.end(media);
-    } else if (request.url == '/img/pipeUp.png') {
-        const media = fs.readFileSync('img/pipeUp.png', 'utf8');
-        response.end(media);
-    } else if (request.url == '/img/pipeBottom.png') {
-        const media = fs.readFileSync('img/pipeBottom.png', 'utf8');
-        response.end(media);
-    } else if (request.url == '/audio/fly.mp3') {
-        const media = fs.readFileSync('audio/fly.mp3', 'utf8');
-        response.end(media);
-    } else if (request.url == '/audio/score.mp3') {
-        const media = fs.readFileSync('audio/score.mp3', 'utf8');
-        response.end(media);
-    } else {
-        const text = fs.readFileSync('index.html','utf8');
-        response.end(text);
+    console.log(request.method, request.url);
+    switch (request.url){
+        case '/myjs.js':
+            var myscript = fs.readFileSync('myjs.js');
+            response.end(myscript);
+        case '/img/bird.png':
+            var media = fs.readFileSync('img/bird.png');
+            response.end(media);
+        case '/img/bg.png':
+            var media = fs.readFileSync('img/bg.png');
+            response.end(media);
+        case '/img/fg.png':
+            var media = fs.readFileSync('img/fg.png');
+            response.end(media);
+        case '/img/pipeUp.png':
+            var media = fs.readFileSync('img/pipeUp.png');
+            response.end(media);
+        case '/img/pipeBottom.png':
+            var media = fs.readFileSync('img/pipeBottom.png');
+            response.end(media);
+        case '/audio/fly.mp3':
+            var media = fs.readFileSync('audio/fly.mp3');
+            response.end(media);
+        case '/audio/score.mp3':
+            var media = fs.readFileSync('audio/score.mp3');
+            response.end(media);
+        default:
+            var text = fs.readFileSync('index.html');
+            response.end(text);
     }
 });
 

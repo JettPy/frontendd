@@ -19,26 +19,26 @@ var score_audio = new Audio();
 fly.src = "audio/fly.mp3";
 score_audio.src = "audio/score.mp3";
 
-var gap = 90;
+var gap = 150;
 
 var pipe = [];
 
 pipe[0] = {
     x : cvs.width,
-    y : 0
-}
+    y : Math.floor(Math.random() * pipeUp.height) - pipeUp.height
+};
 
 var score = 0;
 
 var xPos = 10;
 var yPos = 150;
-var grav = 1;
+var grav = 1.5;
 
 document.addEventListener("keydown", moveUp);
 document.addEventListener("click", moveUp);
 
 function moveUp() {
-    yPos -= 20;
+    yPos -= 30;
     fly.play();
 }
 
@@ -50,7 +50,7 @@ function draw() {
 
         pipe[i].x--;
 
-        if(pipe[i].x == 125){
+        if(pipe[i].x === 125){
             pipe.push({
                 x : cvs.width,
                 y : Math.floor(Math.random() * pipeUp.height) - pipeUp.height
@@ -60,13 +60,21 @@ function draw() {
         if(xPos + bird.width >= pipe[i].x
             && xPos <= pipe[i].x + pipeUp.width
             && (yPos <= pipe[i].y + pipeUp.height
-                || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
+                || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) ||
+            yPos + bird.height >= cvs.height - fg.height || yPos <= 0) {
             yPos = 150;
             score = 0;
+            pipe = [];
+            i = 0;
+            pipe[0] = {
+                x : cvs.width,
+                y : Math.floor(Math.random() * pipeUp.height) - pipeUp.height
+            }
         }
 
-        if(pipe[i].x == 5) {
+        if(pipe[i].x === 5) {
             score++;
+            gap --;
             score_audio.play();
         }
     }

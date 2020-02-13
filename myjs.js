@@ -64,6 +64,7 @@ function draw() {
             yPos + bird.height >= cvs.height - fg.height || yPos <= 0) {
             yPos = 150;
             score = 0;
+            gap = 150;
             pipe = [];
             i = 0;
             pipe[0] = {
